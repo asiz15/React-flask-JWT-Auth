@@ -5,10 +5,13 @@ import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
+import { Login } from "./pages/login";
+import { Register } from "./pages/register";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import ProtectedRoute from "./component/protectedRoute";
 
 //create your first component
 const Layout = () => {
@@ -22,11 +25,16 @@ const Layout = () => {
 				<ScrollToTop>
 					<Navbar />
 					<Switch>
-						<Route exact path="/">
-							<Home />
-						</Route>
+						<ProtectedRoute exact path="/" component={Home} />
+
 						<Route exact path="/demo">
 							<Demo />
+						</Route>
+						<Route exact path="/login">
+							<Login />
+						</Route>
+						<Route exact path="/register">
+							<Register />
 						</Route>
 						<Route exact path="/single/:theid">
 							<Single />

@@ -10,6 +10,7 @@ from api.utils import APIException, generate_sitemap
 from api.models import db
 from api.routes import api
 from api.admin import setup_admin
+from flask_jwt_extended import JWTManager
 #from models import Person
 
 ENV = os.getenv("FLASK_ENV")
@@ -36,6 +37,8 @@ setup_admin(app)
 
 # Add all endpoints form the API with a "api" prefix
 app.register_blueprint(api, url_prefix='/api')
+
+jwt = JWTManager(app)
 
 # Handle/serialize errors like a JSON object
 @app.errorhandler(APIException)

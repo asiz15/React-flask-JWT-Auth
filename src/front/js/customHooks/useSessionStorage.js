@@ -1,0 +1,22 @@
+import { useState, useEffect } from "react";
+
+function getSessionStorageOrDefault(key, defaultValue) {
+	const stored = sessionStorage.getItem(key);
+	if (!stored) {
+		return null;
+	}
+	return stored;
+}
+
+export function useSessionStorage(key, defaultValue) {
+	const [value, setValue] = useState(getSessionStorageOrDefault(key, defaultValue));
+
+	useEffect(
+		() => {
+			sessionStorage.setItem(key, value);
+		},
+		[key, value]
+	);
+
+	return [value, setValue];
+}
